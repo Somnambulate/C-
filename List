@@ -1,0 +1,44 @@
+/**
+*  struct ListNode {        //链表节点定义
+*        int val;
+*        struct ListNode *next;
+*        ListNode(int x) :
+*              val(x), next(NULL) {
+*        }
+*  };
+*/
+问题描述：输入一个链表，按链表从尾到头顺序返回一个ArrayList。
+思路分析：可以利用栈先进后出的特点；可以先从头到尾存放 ，然后再翻转数组；可以利用递归。
+class Solution {    //栈
+public:
+    vector<int> printListFromTailToHead(ListNode* head) {
+        vector<int>ArrayList;
+        ListNode*p=head;
+        stack<int>tmp;
+        while(p!=NULL){
+            tmp.push(p->val);
+            p=p->next;
+        }
+        while(!tmp.empty()){
+            ArrayList.push_back(tmp.top());
+            tmp.pop();
+        }
+        return ArrayList;
+    }
+};
+
+class Solution {    //递归
+public:
+    vector<int> value;
+    vector<int> printListFromTailToHead(ListNode* head) {
+        ListNode *p=NULL;
+        p=head;
+        if(p!=NULL){
+            if(p->next!=NULL){
+                printListFromTailToHead(p->next);
+            }
+            value.push_back(p->val);
+        }
+        return value;
+    }
+};
